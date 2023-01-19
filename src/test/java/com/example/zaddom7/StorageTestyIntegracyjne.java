@@ -1,5 +1,6 @@
 package com.example.zaddom7;
 
+import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,21 +51,20 @@ class StorageTestyIntegracyjne {
         assertEquals("user22",result.getUser());
     }
 
-
     @Test
     public void testChangeEmp() {
-
+        Storage storage = new Storage();
         Regist regist = storage.findByID(1);
 
         String initialEmp = regist.getEmployee();
 
-        doNothing().when(storage).changeEmp(1, "emp1");
         storage.changeEmp(1, "emp4");
         regist = storage.findByID(1);
         String updatedEmp = regist.getEmployee();
-        
+
         assertNotEquals(initialEmp, updatedEmp);
         assertEquals("emp4", updatedEmp);
     }
+
 
 }
